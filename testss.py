@@ -1,33 +1,28 @@
-import threading
+from multiprocessing.pool import ThreadPool
+pool = ThreadPool(processes=2)
  
  
 def print_cube(num):
     # function to print cube of given num
-    print("Cube: {}" .format(num * num * num))
-    return num**num
+    # print("Cube: {}" .format(num * num * num))
+    return 100
  
  
 def print_square(num):
     # function to print square of given num
-    print("Square: {}" .format(num * num))
-    return num**num*num
+    # print("Square: {}" .format(num * num))
+    return 200
  
+
+def function1():
+    async_result = pool.apply_async(print_cube, ({'11':3},))
+    async_result1 = pool.apply_async(print_square, ({'11':4},))
+ 
+    
+    print(async_result.get(), async_result1.get())
+    # both threads completely executed
+    print("Done!")
  
 if __name__ =="__main__":
     # creating thread
-    t1 = threading.Thread(target=print_square, args=(10,))
-    t2 = threading.Thread(target=print_cube, args=(10,))
- 
-    # starting thread 1
-    t1.start()
-    # starting thread 2
-    t2.start()
- 
-    # wait until thread 1 is completely executed
-    x = t1.join()
-    # wait until thread 2 is completely executed
-    y = t2.join()
-    
-    print(x, y)
-    # both threads completely executed
-    print("Done!")
+    function1()

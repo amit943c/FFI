@@ -18,3 +18,4 @@ boto3
 pillow
 google-cloud-datastore
 gunicorn
+multithreading
