@@ -1,0 +1,23 @@
+{% extends "base_first.html" %}
+{% block content %}
+<body class="background_second">
+        <div class="logo_image">
+            <img class="logo_sm" src="{{ url_for( 'static', filename='logo.png')}}" alt="logo">
+            <h1 style="color: #ffffff"> | Welcome to IDfy's Celebrity FaceMatch</h1>
+        </div>
+        <form action="post">
+          <div class="user_input">
+            <input mitname="image" accept="image/*" capture="user">
+            <img id="user_image" src="#" alt="input_image" style="width: 10%" />
+          </div>
+          
+          <div class="action_button">
+              <button class="btn btn-primary rounded-pill btn-lg" type="submit" style="position: fixed; bottom: 25%; right: 10%; border-radius: 32px; font-size: 300%;">
+              Submit 
+              <i class="fa fa-solid fa-caret-right"></i>
+              </button>
+          </div>
+        </form>
+
+</body>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}
+    </div>
+{% endif %}
+{% endwith %}
+<div class="column is-6 is-offset-3">
+    <h3 class="title">Login</h3>
+    <div class="box">
+        <form method="POST" action="/login">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-rounded is-responsive" type="text" name="email" placeholder="Email ID" autofocus="" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-rounded is-responsive" type="password" name="password" placeholder="password" autofocus="" required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <input type="checkbox" id="remember_me" name="remember" value="remember">
+                    <label for="remember"> Remember Me</label><br>
+                </div>
+            </div>
+            <button class="button is-info is-rounded is-responsive is-outlined" type="submit">Login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

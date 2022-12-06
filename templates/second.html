@@ -1,0 +1,114 @@
+{% extends "base_first.html" %}
+{% block content %}
+<body class="background_second">
+        <div class="logo_image">
+            <img class="logo_sm" src="{{ url_for( 'static', filename='logo.png')}}" alt="logo">
+            <h1 style="color: #ffffff"> | Welcome to IDfy's Celebrity FaceMatch</h1>
+        </div>
+
+        <form method="POST" action="/search_celeb" enctype="multipart/form-data" id="imgForm" name="imgForm">
+          <div class="user_input" id="user_input_div">
+            <div class= "img_div" style="text-align: center;">
+
+              <!-- <input type='file' id="getFile" style="display:none"> -->
+              <input id="img_file" style="display:none" type="file" accept="image/*" capture="user" name="image" onChange="enableNext(this);">
+<!--               <input id="img_file" style="display:none" type="file" accept="image/*" capture="user" name="image" onChange="enableSubmit(this);">   -->
+              <!-- onChange="readURL(this);"> -->
+              <!-- <input type="file" name="image" accept="image/*" capture="user" onChange="readURL(this);"> -->
+              <img id="user_image" src="{{ url_for( 'static', filename='default.jpg')}}" alt="input_image" style="display: block; border-radius: 15%; width: 150; height: 200;"/>
+
+              <label  class="btn-success" id="input_label" onclick="document.getElementById('img_file').click()">
+                Capture <i class="fa fa-solid fa-camera"></i>
+                </label>
+            </div>
+<!--             <div class= "img_div" style="position: fixed; bottom: 29%; right: 30%">
+              <input type="radio" id="male" name="gender" value="Male" checked>
+              <label for="male">Male</label><br>
+              
+              <input type="radio" id="female" name="gender" value="Female">
+              <label for="female">Female</label><br>
+            </div> -->
+          </div>
+
+          <div class="user_address" id="user_address_div" style="display: none">
+              <div class="form-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" style="margin-top: 10vw">
+                <label for="inputName">Name*</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Full Name" name="name" pattern="[A-Za-z .]+" required>
+              </div>
+              <div class="form-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                <label for="inputMobile">Mobile Number*</label>
+                <input type="text" class="form-control" id="inputMobile" placeholder="Mobile" name="mobile" pattern="[0-9+]{10,13}" required>
+              </div>
+              <div class="form-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                <label for="inputEmail">Email address*</label>
+                <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" pattern="^[A-z0-9+_.-]+@[A-z0-9.-]+$" required>
+              </div>
+
+              <div class="field">
+                <div class="control form-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                  <label for="gender">Gender</label><br>
+                    <input type="radio" id="radio-male" name="gender" value="Male" checked>
+                    <label for="Male">Male</label>
+                    <input type="radio" id="radio-female" name="gender" value="Female">
+                    <label for="Female">Female</label>
+                    <input type="radio" id="radio-nb" name="gender" value="Nonbinary" >
+                    <label for="Nonbinary">Non Binary</label>
+                </div>
+            </div>
+
+              <div class="field">
+                <div class="control form-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                  <label for="is_student">Are you a student?</label>
+                    <input type="radio" id="radio-student" name="is_student" value="student" onclick="show_student();" checked>
+                    <label for="Yes">Yes</label>
+                    <input type="radio" id="radio-employee" name="is_student" value="employee" onclick="show_employee();">
+                    <label for="No">No</label>
+                </div>
+            </div>
+            <div class="field" id="student">
+                <div class="control form-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                    <input class="form-control" type="text" name="name_of_institute" placeholder="Institute name*" autofocus="">
+                    <input class="form-control" type="text" name="year_of_education" placeholder="Year of education*" autofocus="">
+                </div>
+            </div>
+            <div class="field" id="employee" style="display: none;">
+              <div class="control form-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                    <input class="form-control" type="text" name="name_of_company" placeholder="Company name*" autofocus="">
+                    <input class="form-control" type="text" name="designation" placeholder="Designation*" autofocus="">
+                  </div>
+            </div>
+
+              <div class="field">
+                <div class="control form-group col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+                  <label for="looking_for_opportunities">Are you looking for Job opportunities?</label>
+                    <input type="radio" id="radio-looking" name="looking_for_opportunities" value="looking" checked>
+                    <label for="Yes">Yes</label>
+                    <input type="radio" id="radio-not-looking" name="looking_for_opportunities" value="not-looking">
+                    <label for="No">No</label>
+                </div>
+            </div>
+
+
+              <div class="action_button">
+                <button class="btn btn-primary rounded-pill btn-lg" type="submit" style="position: fixed; bottom: 18%; right: 10%; border-radius: 32px; font-size: 2.8vw;">
+                Submit 
+                <i class="fa fa-solid fa-caret-right"></i>
+              </button>
+          </div>
+          </div>
+<!--           <div class="action_button" style="display: none">
+                <button id="submit_button_box" class="btn btn-primary rounded-pill btn-lg" type="submit" style="display: none; position: fixed; bottom: 18%; right: 10%; border-radius: 32px; font-size: 2.8vw;">
+                Submit 
+                <i class="fa fa-solid fa-caret-right"></i>
+              </button>
+          </div> -->
+        </form>
+        <div id="next_button">
+              <button id="next_button_box" class="btn btn-primary rounded-pill btn-lg" style="display: none; position: fixed; bottom: 18%; right: 10%; border-radius: 32px; font-size: 2.8vw;" onClick="showInputFields(this);">
+              Next 
+              <i class="fa fa-solid fa-caret-right"></i>
+              </button>
+        </div>
+
+</body>
+{% endblock %}

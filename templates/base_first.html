@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Celebrity Match - IDfy</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for( 'static', filename='style.css')}}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<div id="loader" style="display: none;"></div>
+{% block content %}{% endblock %}
+<div id="labs_logo_div">
+	<img style="position: fixed; float: right; bottom: 2%; right: 2%" class="logo logo_lg" src="{{ url_for( 'static', filename='logo_labs.png')}}" alt="logo">
+</div>
+<script type="text/javascript" src="{{ url_for( 'static', filename='javascript.js')}}"></script>
+</html>

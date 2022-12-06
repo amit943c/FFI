@@ -1,0 +1,46 @@
+{% extends "base_first.html" %}
+{% block content %}
+<body class="background_final">
+	<div class="container">
+		<div style="text-align: center; margin-top: 20vw">
+			<h1 style="color: grey; font-size: 3vw">{{congrats_text}}</h1>
+		</div>
+<!-- 		<div class= "img_div" style="text-align: center; position: fixed; bottom: 26%; left: 30%">
+			{{input_person['name']}}
+		  <img class="img-responsive" src="{{ url_for( 'static', filename=input_person['face_image'])}}" style="border-radius: 16px">
+		</div>
+		<div class= "img_div" style="text-align: center; position: fixed; bottom: 26%; right: 30%">
+			{{celeb['name']}}
+		  <img class="img-responsive" src="{{ url_for( 'static', filename=celeb['face_image'])}}" style="border-radius: 16px">
+		</div> -->
+		<br><br>
+		<div class="row">
+			<div class= "col-md-6 col-sm-6 col-xs-6" style="text-align: center; border-radius: 16px;">
+				<p style="margin-left: 15vw;">{{input_person['name']}}</p>
+			</div>
+			<div class= "col-md-6 col-sm-6 col-xs-6" style="text-align: center;">
+				<p style="margin-right: 15vw;">{{celeb['name']}}</p>
+			</div>
+		</div>
+
+			<div class= "img_div col-md-6 col-sm-6 col-xs-6" style="text-align: center;">
+			 <!-- position: fixed; bottom: 26%; left: 30%"> -->
+				<!-- {{input_person['name']}} -->
+			  <img class="" src="{{ url_for( 'static', filename=input_person['face_image'])}}" style="border-radius: 16px;  margin-left: 15vw; object-fit: cover;">
+			</div>
+			<div class= "img_div col-md-6 col-sm-6 col-xs-6" style="text-align: center;">
+			 <!-- position: fixed; bottom: 26%; right: 30%"> -->
+				<!-- {{celeb['name']}} -->
+			  <img class="" src="{{ url_for( 'static', filename=celeb['face_image'])}}" style="border-radius: 16px;  margin-right: 15vw; object-fit: cover;">
+			</div>
+		</div>
+		<br>
+		<div style="text-align: center;">
+			<b style="color: blue; font-size: 2.5vw;">{{celeb['similarity']}}%</b><br>
+			<b style="font-size: 2vw;">Match Score</b><br><br>
+			<a href="/" style="font-size: 1.9vw; float: bottom">Go back</a>
+		</div>
+	</div>
+</body>
+
+{% endblock %}

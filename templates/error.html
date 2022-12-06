@@ -1,0 +1,18 @@
+{% extends "base_first.html" %}
+{% block content %}
+<body class="background">
+        <div class="background_image" style="text-align: center;">
+            <img class="logo logo_lg" src="{{ url_for( 'static', filename='logo.png')}}" alt="logo">
+        </div>
+        <div class="container" style="text-align: center; color: #ffffff; font-size: 3.5vw">
+            Welcome to IDfy's Celebrity FaceMatch
+        </div>
+        <div style="text-align: center; font-size: 3.5vw; margin-top: 25%;">
+            <b>Sorry, Something went wrong. Please try again.</b>
+        </div>
+        <div style="text-align: center;">
+            <a href="/" style="font-size: 1.9vw; font-size: 2.5vw; margin-top: 40%;">home</a>
+        </div>
+
+</body>
+{% endblock %}

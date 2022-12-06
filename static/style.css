@@ -1,0 +1,299 @@
+/*div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/load.gif) no-repeat;
+    cursor: wait;
+    }
+*/
+
+/* This is the submit button styles */
+button {
+  display: block;
+  margin: 0 auto;
+  padding: .6em .8em;
+  /* Font-size is the root value that determines size of spinner parts. 
+Change this to whatever you want and spinner elements will size to match. */
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: .4em;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: all 1s;
+}
+
+/* focus/disabled styles, you can change this for accessibility */
+button:focus, button:disabled {
+  outline: none;
+  background: #aaa;
+}
+
+/* This is the space for the spinner to appear, applied to the button */
+.spin {
+  padding-left: 2.5em;
+  display: block;
+}
+
+/* This is the space for the spinner to appear, applied to the button */
+.spin .button {
+  padding-left: 2.5em;
+  display: block;
+  color: #808080;
+  background-color: #808080;
+}
+
+
+/* position of the spinner when it appears, you might have to change these values */
+.spin .spinner {
+  left: -.6em;
+  top: .4em;
+  width: 2.5em;
+  display: block;
+  position: absolute;
+}
+
+/* spinner animation */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* The actual spinner element is a pseudo-element */
+.spin .spinner::before {
+  content: "";
+  width: 1.5em; /* Size of the spinner */
+  height: 1.5em; /* Change as desired */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: solid .35em #999; /* Thickness/color of spinner track */
+  border-bottom-color: #555; /* Color of variant spinner piece */
+  animation: .8s linear infinite spinner; /* speed of spinner */
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+/* optional, but it will affect the size if changed */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.center-table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.center-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.hide {
+  display: none;
+}
+/*#phoneNo:invalid .button {
+	cursor: not-allowed;
+	pointer-events: none;
+	color: #c0c0c0;
+	background-color: #ffffff;
+}
+
+#phoneNo:valid .button {
+	cursor: pointer;
+	pointer-events: auto;
+	background-color: #209cee;
+	color: #fff;
+}*/
+
+.homelist {
+  text-align: left;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+#nav-dashboard {
+  font-size: 2vw;
+  padding: .4em .6em;
+}
+
+#nav-dashboard span {
+  border: solid .05em #aaa;
+  border-radius: 10%;
+}
+
+.center-table-dash th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.center-table-dash td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.active, .navbar-item:hover {
+  background-color: #666;
+  color: white;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*#nav-dashboard a:active, #nav-dashboard a.active {
+       border: 1px solid #000;
+       background-color: yellow;
+   }*/
+
+
+#loader{
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  width: 100%;
+  height: 100vh;
+  background: #21242d url('loader/loader_lite.gif') no-repeat center;
+  /*z-index: 999;*/
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+.background{
+  /*position: fixed;*/
+  background: #21242d url('1.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+}
+
+.background_second{
+  /*position: fixed;*/
+  background: #21242d url('2.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+}
+
+.background_final{
+  /*position: fixed;*/
+  background: #21242d url('4.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+}
+
+.top-nav {
+  position: absolute;
+  /*width: 1440px;*/
+  /*height: 88px;*/
+  width: 100%;
+  height: 10%;
+  /*left: 0px;*/
+  /*top: 0px;*/
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 23% 75%;
+  grid-gap: 10px;
+
+  /*background: linear-gradient(90deg, #CE1417 7.01%, #1C43B9 44.79%);*/
+}
+
+.logo {
+  margin-top: 2%;
+  width: 12%;
+}
+
+.logo_sm {
+  margin-top: 2%;
+  width: 7%;
+  float: left;
+  margin-left: 15%;
+  margin-right: 2%;
+}
+
+.logo_image h1 {
+  margin-top: 2.2%;
+  font-size: 3.3vw;
+  float: left;
+}
+
+.user_input {
+  position: fixed;
+  bottom: 15%; 
+  left: 41%;
+  float: left;
+  font-size: 3.3vw;
+}
+
+.user_input input[type=radio] {
+    width: 3.3vw;
+    height: 3.3vw;
+}
+
+.img_div img {
+  height: 18vw;
+  width: 18vw;
+}
+
+.img_first img {
+  height: 18vw;
+  width: 18vw;
+}
+
+#input_label {
+  width: 15.5vw;  
+  border-radius: 32px; 
+  font-size: 75%;
+  align-items: center;
+}
+
+.img_div label {
+  margin-bottom: 0;
+}
+
+#user_image {
+  object-fit: cover
+}

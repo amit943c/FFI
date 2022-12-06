@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block navigation %}
+    	<span class="column is-4 is-offset-8">
+	        {{name}} <a href="{{ url_for('auth.logout') }}">Logout</a>
+		</span>
+{% endblock %}
+{% block content %}
+
+<div class="">
+  <div class="navbar-menu">
+    <div id="nav-dashboard" class="navbar-start">
+    {% for key in dictionary %} 
+    	<span class="navbar-item" value="{{key}}" onclick="filterTable('{{key}}');">
+	        {{key}} 
+	        <br>
+	        {{dictionary[key]}}
+		</span>
+    {% endfor %}
+    </div>
+   </div>
+</div>
+<div class="table center-table-dash" id="content">
+	<table> 
+		<thead> 
+			<tr> 
+				<th>Name</th> 
+				<th>Phone Number</th>
+				<th>Email ID</th>
+				<th>UAN</th>
+				<th>status</th>
+				<th>Check/RAG status</th>
+			</tr> 
+		</thead> 
+		<tbody id="mytable"> 
+		{% for row in value %}  
+			<tr> 
+				<td>{{row[0]}}</td> 
+				<td>{{row[1]}}</td> 
+				<td>{{row[2]}}</td> 
+				<td>{{row[3]}}</td> 
+				<td>{{row[4]}}</td> 
+				<td style="color: {{color_dict[row[5]]}}">{{row[5]}}</td>
+				<td>
+					<!-- <button class="button is-info is-small is-rounded is-responsive is-outlined"> -->
+					<form method="POST" action="/invite_candidate">
+					{% if row[6] == "pending" %}
+						<button class="button is-info is-small is-rounded is-responsive is-outlined" name="invite_button" value="{{row[1]}}">invite</button>
+					{% elif row[5] == "" %}
+						<button class="button is-info is-small is-rounded is-responsive is-outlined" name="remind_button" value="{{row[1]}}">remind</button>
+					{% endif %}
+					</form>
+			        <!-- </button> -->
+				</td> 
+			</tr> 
+		{% endfor %}
+			<form method="POST" action="/add_candidate">
+				<tr>
+					<td><input class="input is-rounded is-responsive is-small" type="text" name="name" placeholder="Name" autofocus=""></td>
+					<td><input class="input is-rounded is-responsive is-small" type="number" name="mobile_number" placeholder="Mobile Number" autofocus=""></td>
+					<td><input class="input is-rounded is-responsive is-small" type="email" name="email_id" placeholder="Email" autofocus=""></td>
+					<td><input class="input is-rounded is-responsive is-small" type="number" name="uan" placeholder="UAN" autofocus=""></td>
+					<td></td>
+					<td></td>
+					<td><button class="button is-info is-small is-rounded is-responsive is-outlined">add</button></td>
+				</tr>
+			</form>
+		</tbody> 
+	</table>
+	<tr>
+		<td><button id="myBtn" class="button is-info is-small is-rounded is-responsive is-pulled-left"> + bulk add</button></td>
+	</tr>
+
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			  <button class="button is-info is-small is-rounded is-responsive" onclick="download_csv_file();">
+			    <span class="icon is-small">
+			      <i class="fas fa-download"></i>
+			    </span>
+			    <span>
+			    sample csv
+			    </span>
+			  </button>
+			<form method="POST" action="/add_candidate/file" enctype="multipart/form-data">
+				<td>
+					<button id="myBtn" class="button is-info is-small is-rounded is-responsive">
+						<span class="icon is-small">
+				      		<i class="fas fa-upload"></i>
+				    	</span>
+				    	<span>
+						upload csv
+				    	</span>
+					</button>
+				</td>
+				<td>
+					<input type="file" id="candidate_csv" name="candidate_details" accept=".xlsx, .xls, .csv" value="upload csv" required>
+				</td>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
