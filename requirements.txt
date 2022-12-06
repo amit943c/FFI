@@ -19,4 +19,3 @@ pillow
 google-cloud-datastore
 gunicorn
 multithreading
-multiprocessing
