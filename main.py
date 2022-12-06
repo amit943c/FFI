@@ -51,6 +51,7 @@ def capture():
 # @login_required
 def search_celeb():
 	try:
+		init_time = time.time()
 		object_name, path_prefix = image_upload(request)
 		resize_image(object_name, path_prefix)
 
@@ -120,7 +121,10 @@ def search_celeb():
 			'designation': designation,
 			'looking_for_opportunities': looking_for_opportunities,
 		}
+		start_time = time.time()
 		save_info(details)
+		print("datastore time", time.time()-start_time)
+		print("total time", time.time()-init_time)
 	except:
 		return render_template('error.html')		
 

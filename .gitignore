@@ -154,3 +154,5 @@ htmlfiles/
 *.ipynb
 static/captcha/*
 credentials_a.json
+static/camera/*
+static/faces/*
