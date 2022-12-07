@@ -48,6 +48,10 @@ def initiate():
 def capture():
 	return render_template('second.html')
 
+@main.route("/_health", methods=["GET"])
+def _health():
+    return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
+
 @main.route("/search_celeb", methods=["POST"])
 # @login_required
 def search_celeb():
@@ -78,7 +82,7 @@ def search_celeb():
 	try:
 		start_time = time.time()
 		pool = ThreadPool(processes=2)
-		async_result_datastore = pool.apply_async(save_to_datastore, (details,))
+		async_result_datastore = pool.apply_async(save_result_to_redis, (details,))
 		image = req.files.get('image')
 		async_result_celeb = pool.apply_async(search_face_db, (details, image,))
 		(celeb, input_person, congrats_text) = async_result_celeb.get()

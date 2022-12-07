@@ -110,9 +110,21 @@ if (myForm !== null) {
 function show_student(){
   document.getElementById("employee").style.display = 'none';
   document.getElementById("student").style.display = 'block';
+
+  document.getElementById("comp_name").required = false;
+  document.getElementById("designation").required = false;
+
+  document.getElementById("insti_name").required = true;
+  document.getElementById("ed_year").required = true;
 }
 
 function show_employee(){
   document.getElementById("student").style.display = 'none';
   document.getElementById("employee").style.display = 'block';
+
+  document.getElementById("comp_name").required = true;
+  document.getElementById("designation").required = true;
+
+  document.getElementById("insti_name").required = false;
+  document.getElementById("ed_year").required = false;
 }
