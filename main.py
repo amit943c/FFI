@@ -82,7 +82,7 @@ def search_celeb():
 	try:
 		start_time = time.time()
 		pool = ThreadPool(processes=2)
-		async_result_datastore = pool.apply_async(save_result_to_redis, (details,))
+		async_result_datastore = pool.apply_async(save_to_datastore, (details,))
 		image = req.files.get('image')
 		async_result_celeb = pool.apply_async(search_face_db, (details, image,))
 		(celeb, input_person, congrats_text) = async_result_celeb.get()
