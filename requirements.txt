@@ -19,3 +19,4 @@ pillow
 google-cloud-datastore
 gunicorn
 multithreading
+redis
