@@ -62,7 +62,7 @@ build:
     variables:
       - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy?\]|WIP/i
   variables:
-    GOOGLE_PROJECT_ID: idfy-gitlab
+    GOOGLE_PROJECT_ID: idfy-labs-staging
     NAME: ghost-hire
   only:
     - develop
