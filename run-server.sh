@@ -4,4 +4,4 @@
 cd /var/app
 . bin/activate
 
-gunicorn main:main
+gunicorn -b 0.0.0.0:8080 main:main
