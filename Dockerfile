@@ -29,6 +29,7 @@ ADD . /var/app
 # Run start.sh script when the container starts.
 # Note: If you run migrations etc outside CMD, envs won't be available!
 ##############################################################################
+RUN chmod +x /var/app/run-server.sh
 ENTRYPOINT ["/var/app/run-server.sh"]
 
 EXPOSE 8080
