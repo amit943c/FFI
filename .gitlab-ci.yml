@@ -26,7 +26,7 @@ static_code_analysis:
 
 test:
   stage: test
-  image: python:3.9.5-slim-buster
+  image: python:3.8.16-slim-bullseye
   services:
     - rabbitmq:latest
   before_script:
@@ -35,19 +35,6 @@ test:
     - pip install -r requirements.txt
   script:
     - apt-get -y update
-    # install google chrome
-    - apt-get install wget gnupg2 -y
-    # install google chrome
-    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-    - wget --no-verbose -O /tmp/chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb
-    - apt install -y /tmp/chrome.deb
-    - apt-get install -yqq unzip
-    - apt-get install curl -y
-    - apt-get install -y build-essential libssl-dev libffi-dev
-    - wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
-    - unzip -o /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
-    - chmod +x /usr/local/bin/chromedriver
-    - python -m unittest discover -s app -p "test_*.py"
   variables:
     ROLLBAR_ENV: test
 
@@ -82,47 +69,47 @@ build:
     - master
 
 
-# - - - - DEPLOY - - - -
+# # - - - - DEPLOY - - - -
 
 
-.deploy: &deploy
-  stage: deploy
-  image: google/cloud-sdk
-  before_script:
-    - echo "$GOOGLE_AUTH" > gcloud-service-key.json # Google Cloud service accounts
-    - gcloud auth activate-service-account --key-file gcloud-service-key.json
-    - gcloud config set project $GOOGLE_PROJECT_ID
-    - gcloud --quiet config set container/cluster $GOOGLE_CLUSTER_NAME
-  except:
-    variables:
-      - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy?\]|WIP/i
+# .deploy: &deploy
+#   stage: deploy
+#   image: google/cloud-sdk
+#   before_script:
+#     - echo "$GOOGLE_AUTH" > gcloud-service-key.json # Google Cloud service accounts
+#     - gcloud auth activate-service-account --key-file gcloud-service-key.json
+#     - gcloud config set project $GOOGLE_PROJECT_ID
+#     - gcloud --quiet config set container/cluster $GOOGLE_CLUSTER_NAME
+#   except:
+#     variables:
+#       - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy?\]|WIP/i
 
-deploy_staging:
-  <<: *deploy
-  variables:
-    GOOGLE_PROJECT_ID: idfy-labs-staging
-    GOOGLE_CLUSTER_NAME: labs-staging-cluster-1
-    GOOGLE_COMPUTE_ZONE: asia-south1-b
-    NAME: ghost-hire
-  script:
-    - gcloud --quiet container clusters get-credentials $GOOGLE_CLUSTER_NAME --zone $GOOGLE_COMPUTE_ZONE
-    - bash kube/deploy.sh $CI_COMMIT_SHA staging $GOOGLE_PROJECT_ID $NAME
-  environment:
-    name: staging
-  only:
-    - develop
+# deploy_staging:
+#   <<: *deploy
+#   variables:
+#     GOOGLE_PROJECT_ID: idfy-labs-staging
+#     GOOGLE_CLUSTER_NAME: labs-staging-cluster-1
+#     GOOGLE_COMPUTE_ZONE: asia-south1-b
+#     NAME: ghost-hire
+#   script:
+#     - gcloud --quiet container clusters get-credentials $GOOGLE_CLUSTER_NAME --zone $GOOGLE_COMPUTE_ZONE
+#     - bash kube/deploy.sh $CI_COMMIT_SHA staging $GOOGLE_PROJECT_ID $NAME
+#   environment:
+#     name: staging
+#   only:
+#     - develop
 
-deploy_production:
-  <<: *deploy
-  variables:
-    GOOGLE_PROJECT_ID: idfy-labs-prod
-    GOOGLE_CLUSTER_NAME: labs-prod-cluster-1
-    GOOGLE_COMPUTE_REGION: asia-south1
-    NAME: ghost-hire
-  script:
-    - gcloud --quiet container clusters get-credentials $GOOGLE_CLUSTER_NAME --region $GOOGLE_COMPUTE_REGION
-    - bash kube/deploy.sh $CI_COMMIT_SHA prod $GOOGLE_PROJECT_ID $NAME
-  environment:
-    name: production
-  only:
-    - master
+# deploy_production:
+#   <<: *deploy
+#   variables:
+#     GOOGLE_PROJECT_ID: idfy-labs-prod
+#     GOOGLE_CLUSTER_NAME: labs-prod-cluster-1
+#     GOOGLE_COMPUTE_REGION: asia-south1
+#     NAME: ghost-hire
+#   script:
+#     - gcloud --quiet container clusters get-credentials $GOOGLE_CLUSTER_NAME --region $GOOGLE_COMPUTE_REGION
+#     - bash kube/deploy.sh $CI_COMMIT_SHA prod $GOOGLE_PROJECT_ID $NAME
+#   environment:
+#     name: production
+#   only:
+#     - master

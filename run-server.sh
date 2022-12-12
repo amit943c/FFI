@@ -4,4 +4,4 @@
 cd /var/app
 . bin/activate
 
-python -u run_server.py
+gunicorn main:main
