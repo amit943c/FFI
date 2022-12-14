@@ -118,8 +118,9 @@ def search_face_db(details, image):
 		collection_id = "celeb_male_ffi" 
 	else:
 		collection_id = "celeb_female_ffi" 
-
+	print(":starting to search face")
 	res = search_face(object_name, threshold=0, max_faces=1, collection_id=collection_id)
+	print("finished searching face:")
 	celeb = {}
 	if len(res) > 0:
 		celeb = res[0]
