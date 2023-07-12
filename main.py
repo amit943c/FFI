@@ -112,12 +112,10 @@ def search_face_db(details, image):
 		'name': name,
 	}
 	gender = details.get('gender')
-	if gender.lower() == "female":
-		collection_id = "celeb_female_ffi"
-	elif gender.lower() == "male":
-		collection_id = "celeb_male_ffi" 
-	else:
-		collection_id = "celeb_female_ffi" 
+	collection_id = os.getenv("FEMALE_COLLECTION_ID")
+	if gender.lower() == "male":
+		collection_id = os.getenv("MALE_COLLECTION_ID")
+		 
 	print(":starting to search face")
 	res = search_face(object_name, threshold=0, max_faces=1, collection_id=collection_id)
 	print("finished searching face:")
